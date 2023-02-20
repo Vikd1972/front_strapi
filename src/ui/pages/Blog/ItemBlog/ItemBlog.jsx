@@ -8,7 +8,7 @@ import ItemBlogWrapper from "./ItemBlog.stayles";
 const locale = 'ru';
 
 const ItemBlog = ({ blog }) => {
-  const author = blog.user?.data.attributes;
+  const author = blog.user;
   const dateCreated = new Date(blog.createdAt)
 
   return (

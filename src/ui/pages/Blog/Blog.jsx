@@ -19,9 +19,9 @@ const Blog = () => {
 
   const fetchBlogs = async () => {
     try {
-      const response = await fetch(`${API}/blogs?populate=*`);
+      const response = await fetch(`${API}/message`);
       const data = await response.json();
-      setBlogs(data.data)
+      setBlogs(data)
     } catch (error) {
       console.error(error);
     }
@@ -30,12 +30,12 @@ const Blog = () => {
   const setFilter = async (topic) => {
     let response;
     if (topic === 'all') {
-      response = await fetch(`${API}/blogs?populate=*`);
+      response = await fetch(`${API}/message`);
     } else {
-      response = await fetch(`${API}/blogs?populate=*&filters[topic][$eq]=${topic}`);
+      response = await fetch(`${API}/message/topic?topic=${topic}`);
     }
     const data = await response.json();
-    setBlogs(data.data)
+    setBlogs(data)
   }
 
   useEffect(() => {
@@ -59,8 +59,8 @@ const Blog = () => {
         ))}
       </div>
       <div className="blogs">
-        {blogs.map((blog) => (
-          <ItemBlog key={blog.id} blog={blog.attributes} />
+        {blogs && blogs.map((blog) => (
+          <ItemBlog key={blog.id} blog={blog} />
         ))}
       </div>
     </BlogWrapper>

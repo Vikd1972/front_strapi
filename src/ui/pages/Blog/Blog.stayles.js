@@ -12,7 +12,8 @@ const BlogWrapper = styled.div`
     flex-direction: column;
   }
   .filter {
-    
+    max-width: 80px;
+    width: 100%;
   }
   .add-message {
     cursor: pointer;
