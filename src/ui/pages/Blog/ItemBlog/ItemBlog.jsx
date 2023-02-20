@@ -8,7 +8,7 @@ import ItemBlogWrapper from "./ItemBlog.stayles";
 const locale = 'ru';
 
 const ItemBlog = ({ blog }) => {
-  const author = blog.user;
+  const author = blog.user || {};
   const dateCreated = new Date(blog.createdAt)
 
   return (
@@ -17,10 +17,10 @@ const ItemBlog = ({ blog }) => {
         <Image
           className="author__avatar"
           preview={false}
-          src={author.avatar_url}
+          src={author.avatar_url ? author.avatar_url : 'http://localhost:1337/uploads/thumbnail_007_1278d65f8d.png'}
         />
         <div className="author__data">
-          <h1>{author.username}</h1>
+          <h1>{author.username ? author.username : 'Anonymous'}</h1>
           <SocialLinks author={author} />
         </div>
         <div className="author__header">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import ItemBlog from "./ItemBlog/ItemBlog";
+import SendingMessage from "../SendingMessage/SendingMessage";
 import { API } from "../../../constant";
 
 import BlogWrapper from "./Blog.stayles";
@@ -16,6 +17,7 @@ const topics = [
 
 const Blog = () => {
   const [blogs, setBlogs] = useState([]);
+  const [isNewMessage, setIsNewMessage] = useState(false);
 
   const fetchBlogs = async () => {
     try {
@@ -38,6 +40,10 @@ const Blog = () => {
     setBlogs(data)
   }
 
+  const setNewMessage = () => {
+    setIsNewMessage(!isNewMessage);
+  }
+
   useEffect(() => {
     fetchBlogs();
   }, []);
@@ -45,7 +51,10 @@ const Blog = () => {
   return (
     <BlogWrapper>
       <div className="filter">
-        <div className="add-message">
+        <div
+          className="add-message"
+          onClick={setNewMessage}
+        >
           add new message
         </div>
         ---------
@@ -63,6 +72,11 @@ const Blog = () => {
           <ItemBlog key={blog.id} blog={blog} />
         ))}
       </div>
+      {isNewMessage && <SendingMessage
+        setNewMessage={setNewMessage}
+        topics={topics}
+        setBlogs={setBlogs}
+      />}
     </BlogWrapper>
   )
 };
